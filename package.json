@@ -1,0 +1,70 @@
+{
+  "name": "nouneet",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.15.4",
+    "@babel/plugin-proposal-private-property-in-object": "^7.15.4",
+    "@babel/plugin-syntax-private-property-in-object": "^7.14.5",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.4",
+    "babel": "^6.23.0",
+    "babel-plugin-polyfill-corejs2": "^0.2.2",
+    "babel-plugin-polyfill-corejs3": "^0.2.5",
+    "babel-plugin-polyfill-regenerator": "^0.2.2",
+    "date-fns": "^2.24.0",
+    "firebase": "^9.0.2",
+    "has-tostringtag": "^1.0.0",
+    "lodash.merge": "^4.6.2",
+    "mapbox-gl": "^2.4.1",
+    "nanocolors": "^0.2.2",
+    "object.hasown": "^1.0.0",
+    "react": "^17.0.2",
+    "react-datepicker": "^4.2.1",
+    "react-dom": "^17.0.2",
+    "react-responsive": "^9.0.0-beta.4",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "react-simple-chatbot": "^0.6.1",
+    "source-map": "^0.6.1",
+    "source-map-js": "^0.6.2",
+    "styled-components": "^5.3.1",
+    "use-file-upload": "^1.0.11",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-static-block": "^7.15.4"
+  }
+}
