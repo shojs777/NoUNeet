@@ -21,13 +21,13 @@ export const App = () => {
       <Router>
         <Switch>
           <LoggedInRoute exact path="/" component={Home}></LoggedInRoute>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/signup" component={SignUp}></Route>
-          <Route path="/resetpassword" component={ResetPassword}></Route>
-          <Route path="/signincheck" component={SignInCheck}></Route>
-          <Route path="/signup" component={SignUp}></Route>
-          <Route path="/mapbox" component={MapBox}></Route>
-          <Route path="/profile" component={Profile}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/signup" component={SignUp}></Route>
+          <Route exact path="/resetpassword" component={ResetPassword}></Route>
+          <Route exact path="/signincheck" component={SignInCheck}></Route>
+          <Route exact path="/signup" component={SignUp}></Route>
+          <Route exact path="/mapbox" component={MapBox}></Route>
+          <Route exact path="/profile" component={Profile}></Route>
           <Route
             exact
             path="/company/:id"

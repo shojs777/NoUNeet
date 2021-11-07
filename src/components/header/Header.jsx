@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from "../../AuthService";
 import firebase from '../../config/firebase';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -36,7 +37,14 @@ const useStyles = makeStyles((theme) => ({
 export const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const classes = useStyles();
-
+  const {
+    user,
+    email,
+    password,
+    setUser,
+    setEmail,
+    setPassword
+  } = useContext(AuthContext);
   const toggleOpen = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -91,26 +99,29 @@ export const Header = () => {
                   <Button
                     color="inherit"
                     className={classes.text}
-                    onClick={() => firebase.auth().signOut()
-                      .then(() => {
-                        alert('サインアウトしました。')
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                      })
+                    onClick={() => {
+                      setUser(null);
+                      firebase.auth().signOut()
+                        .then(() => {
+                          alert('サインアウトしました。')
+                          console.log('サインアウトしました。')
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
+                    }
                     }
                   >
                     <LogoutIcon />
                   LogOut
-                </Button>
+                  </Button>
                 </Link>
               </SNavItem>
             </Drawer>
           </SHumbuggerWrapper>
-
         </Toolbar>
       </AppBar>
-    </div>
+    </div >
   );
 };
 

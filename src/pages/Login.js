@@ -42,7 +42,7 @@ export const Login = ({ history }) => {
 
 
   if (user) {
-    return <Redirect to="/" />;
+    // return <Redirect to="/" />;
   }
 
   return (
