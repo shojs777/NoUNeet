@@ -22,7 +22,7 @@ export const SignInCheck = () => {
   const history = useHistory();
 
   if (user) {
-    return <Redirect to="/" />;
+    // return <Redirect to="/" />;
   }
 
   const handleSubmit = (e) => {
@@ -35,13 +35,13 @@ export const SignInCheck = () => {
     firebase
       .auth()
       .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(function() {
+      .then(function () {
         window.localStorage.setItem("emailForSignIn", email);
         console.log(window.localStorage.getItem("emailForSignIn"));
         console.log("succes");
         history.push("/");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error.code);
         console.log(error.message);
         alert("無効な値です");
