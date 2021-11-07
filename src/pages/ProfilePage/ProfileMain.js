@@ -5,10 +5,19 @@ import { getAuth } from "firebase/auth";
 import { media } from '../../util/MediaQuery';
 import Sample from './EditPage/Photo/sample';
 
+//material-ui
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 import styled from 'styled-components';
 import { set } from 'date-fns/esm';
@@ -63,7 +72,7 @@ const ProfileMain = () => {
     // firebase.auth.user
     // console.log(user)
   }, [jobValue])
-  const handleClick = (event) => {
+  const handleChange = (event) => {
     selectValue = event.target.value;
     setJobvalue(selectValue)
     console.log(selectValue);
@@ -100,39 +109,27 @@ const ProfileMain = () => {
         <br />
         <br />
         <br />
-
+        電話番号
+        <br />
+        email
         <SProfileJobs>
-          <SJobList>職種</SJobList>
-
           <SRadioBtn>
-            <FormControl component="fieldset">
-              <RadioGroup
-                row
-                aria-label="job"
-                name="controlled-radio-buttons-group"
-                defaultValue="noAnswer"
-              // {selectValue === "noAnswer" ? "noAnswer" : selectValue}
+            <SJobList>職種</SJobList>
+            <FormControl sx={{ width: 120, m: 2 }} variant="standard">
+              <InputLabel id='demo-simple-select-label'>Job</InputLabel>
+              <Select
+                labelId='demo-simple-select-label'
+                id='demo-simple-select'
+                value={jobValue}
+                label='Job'
+                onChange={handleChange}
               >
-                <FormControlLabel
-                  value="student"
-                  control={<Radio />}
-                  label="学生"
-                  onChange={handleClick}
-                />
-                <FormControlLabel
-                  value="worker"
-                  control={<Radio />}
-                  label="社会人"
-                  onChange={handleClick}
-                />
-                <FormControlLabel
-                  value="noAnswer"
-                  control={<Radio />}
-                  label="回答しない"
-                  onChange={handleClick}
-                />
-              </RadioGroup>
+                <MenuItem value={'noAnswer'}>回答しない</MenuItem>
+                <MenuItem value={'student'}>学生</MenuItem>
+                <MenuItem value={'worker'}>社会人</MenuItem>
+              </Select>
             </FormControl>
+
           </SRadioBtn>
         </SProfileJobs>
         <br />
@@ -214,13 +211,13 @@ const SProfileJobs = styled.div`
 `;
 
 const SRadioBtn = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
 `;
 
 const SJobList = styled.h2`
-  width: 28%;
+  width: 25%;
   text-align: center;
   padding: 1%;
   border-style: solid;

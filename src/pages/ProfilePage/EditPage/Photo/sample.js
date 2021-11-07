@@ -3,7 +3,11 @@ import { useFileUpload } from 'use-file-upload';
 import { AuthContext } from '../../../../AuthService';
 import styled from 'styled-components';
 import firebase from '../../../../config/firebase';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
 import { set } from 'date-fns/esm';
+import { Padding } from '@mui/icons-material';
 const Sample = () => {
   const {
     user,
@@ -30,7 +34,12 @@ const Sample = () => {
   }, [])
   return (
     < div >
-      <SImg src={picture ? picture : defaultSrc} alt="preview" />
+      <Avatar
+        alt="preview"
+        src={picture ? picture : defaultSrc}
+        sx={{ width: 80, height: 70 }}
+      />
+      {/* <SImg src={picture ? picture : defaultSrc} alt="preview" /> */}
       {/* "gs://" + selectSrc.location.bucket + "/" + selectSrc.location.path_ */}
       <SDiv>
         <Sbutton

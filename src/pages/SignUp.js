@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import firebase from "../config/firebase";
 import { AuthContext } from "../AuthService";
-
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 // @material-ui
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -54,11 +54,17 @@ export const SignUp = () => {
     firebase
       .firestore()
       .collection("NoUNeet").doc("v1").collection("users").add({
+        bio: null,
+        birthDay: null,
+        confidencePoint: 5,
+        phoneNumber: null,
+        userName: null,
         displayName: userName,
         email: email,
         userId: null,
         photoURL: null,
-        careerType: "回答しない",
+        job: "回答しない",
+        date: Timestamp.fromDate(new Date())
       })
       .then(() => {
         console.log("成功")
