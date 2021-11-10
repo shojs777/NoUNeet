@@ -39,20 +39,13 @@ const ProfileMain = () => {
   } = useContext(AuthContext);
   let selectValue;
 
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      setUser(user)
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   if (user) {
+  //     setUser(user)
 
-      console.log(user)
-    }
-  })
-  // const fetchUser = async (userId) => {
-  //   const user = await firestore
-  //     .doc(`/NoUNeet/v1/users/${userId}`)
-  //     .get()
-  //     .then(d => console.log(d.data));
-  //   return getOrElse(user, null);
-  // };
+  //     console.log(user)
+  //   }
+  // })
 
   useEffect(() => {
     // firebase.auth().onAuthStateChanged((user) => {

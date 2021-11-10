@@ -1,10 +1,10 @@
 import { React, useContext, useEffect } from 'react';
-import { useFileUpload } from 'use-file-upload';
 import { AuthContext } from '../../../../AuthService';
 import styled from 'styled-components';
 import firebase from '../../../../config/firebase';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 import { set } from 'date-fns/esm';
 import { Padding } from '@mui/icons-material';
@@ -14,73 +14,84 @@ const Sample = () => {
     email,
     password,
     userName,
-    picture,
+    image,
+    imageUrl,
     setUser,
     setEmail,
     setPassword,
     setName,
-    setPicture
+    setImage,
+    setImageUrl
   } = useContext(AuthContext);
-  const defaultSrc =
-    'https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png';
-  const [files, selectFiles] = useFileUpload();
-  useEffect(() => {
-    const storageRef = firebase.storage().ref('userProfileImage').child(`DSC00792.JPG`);
-    storageRef.getDownloadURL()
+  let nowImage;
+  const defaultUrl = 'https://www.pngkit.com/png/full/301-3012694_account-user-profile-avatar-comments-fa-user-circle.png';
+
+  if (user) {
+    // console.log(`userProfileImage/${user.uid}/${user.photoURL}`)
+    console.log('imageUrl:' + user.photoURL)
+    firebase
+      .storage()
+      .ref(user.photoURL)
+      .getDownloadURL()
       .then((url) => {
         console.log('初回画像セット成功')
-        setPicture(url)
+        setImageUrl(url)
       })
-  }, [])
+  }
+  const handleImage = event => {
+    console.log('handleImage')
+    console.log(user)
+    nowImage = event.target.files[0];
+    setImage(nowImage.name);
+    console.log(image)
+    firebase
+      .storage()
+      .ref(`userProfileImage/${user.uid}/${nowImage.name}`)
+      .put(nowImage)
+      .then(() => {
+        console.log('seikou');
+        complete();
+        firebase
+          .auth()
+          .currentUser
+          .updateProfile({
+            photoURL: `userProfileImage/${user.uid}/${nowImage.name}`
+          }).then(() => {
+            console.log('URLアップデート成功:' + user.photoURL)
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
+      })
+  };
+  const complete = () => {
+    firebase
+      .storage()
+      .ref(`userProfileImage/${user.uid}/${nowImage.name}`)
+      .getDownloadURL()
+      .then(fireBaseUrl => {
+        setImageUrl(fireBaseUrl);
+      });
+  };
+  // useEffect(() => {
+  // }, [imageUrl])
+  const Input = styled('input')({
+    display: 'none',
+  });
   return (
     < div >
       <Avatar
         alt="preview"
-        src={picture ? picture : defaultSrc}
-        sx={{ width: 80, height: 70 }}
+        src={imageUrl ? imageUrl : defaultUrl}
+        sx={{ width: 80, height: 80 }}
       />
-      {/* <SImg src={picture ? picture : defaultSrc} alt="preview" /> */}
-      {/* "gs://" + selectSrc.location.bucket + "/" + selectSrc.location.path_ */}
       <SDiv>
-        <Sbutton
-          onClick={() => {
-            selectFiles(
-              { accept: 'image/*' },
-              ({ name, size, source, file }) => {
-                console.log('Files Selected', { name, size, source, file });
-                const setFile = file;// use the Blob or File API
-                const storageRef = firebase.storage().ref('userProfileImage').child(`${file.name}`);
-                storageRef.put(setFile)
-                  .then(() => {
-                    console.log('Uploaded 成功');
-                    storageRef.getDownloadURL()
-                      .then((url) => {
-                        console.log('画像セット成功')
-                        setPicture(url)
-                      })
-                  })
-                firebase.auth().onAuthStateChanged((user) => {
-                  if (user) {
-                    user.updateProfile({
-                      photoURL: files?.source
-                    })
-                      .then(() => {
-                        console.log(files)
-                        console.log('user.photoURLをセット成功')
-
-                      })
-                      .catch(error => {
-                        console.log(error)
-                        console.log('失敗')
-                      })
-                  }
-                });
-              })
-          }
-          }
-        >
-          画像をアップ
-        </Sbutton>
+        <label htmlFor="contained-button-file">
+          <Input accept="image/*" id="contained-button-file" type="file" onChange={handleImage} />
+          <Button variant="contained" component="span">
+            写真を選択
+         </Button>
+        </label>
       </SDiv>
     </div >
   );
@@ -90,6 +101,7 @@ const SImg = styled.img`
   width: 100px;
   padding: 1em;
 `;
+
 
 const SDiv = styled.div`
   text-align: center;

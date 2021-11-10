@@ -10,21 +10,24 @@ const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [userName, setName] = useState(null);
-  const [picture, setPicture] = useState(null)
+  const [image, setImage] = useState(null)
   const [jobValue, setJobvalue] = useState('回答しない')
+  const [imageUrl, setImageUrl] = useState('');
   const value = {
     user,
     email,
     password,
     userName,
-    picture,
+    image,
+    imageUrl,
     jobValue,
     setUser,
     setEmail,
     setPassword,
     setName,
-    setPicture,
+    setImage,
     setJobvalue,
+    setImageUrl
   }
 
   // const auth = getAuth();
