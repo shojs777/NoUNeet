@@ -10,25 +10,25 @@ const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [userName, setName] = useState(null);
-  const [image, setImage] = useState(null)
-  const [jobValue, setJobvalue] = useState('回答しない')
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageState, setImageState] = useState(false);
+  const [jobValue, setJobvalue] = useState("回答しない");
+  const [imageUrl, setImageUrl] = useState("");
   const value = {
     user,
     email,
     password,
     userName,
-    image,
+    imageState,
     imageUrl,
     jobValue,
     setUser,
     setEmail,
     setPassword,
     setName,
-    setImage,
+    setImageState,
     setJobvalue,
-    setImageUrl
-  }
+    setImageUrl,
+  };
 
   // const auth = getAuth();
   // const appUser = auth.currentUser;
@@ -53,9 +53,8 @@ const AuthProvider = ({ children }) => {
   // const fetchUser = async () => {
   // }
 
-
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => setUser(user))
+    firebase.auth().onAuthStateChanged((user) => setUser(user));
   }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

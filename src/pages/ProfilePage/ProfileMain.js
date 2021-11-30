@@ -1,26 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../AuthService';
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../../AuthService";
 import firebase from "../../config/firebase";
 import { getAuth } from "firebase/auth";
-import { media } from '../../util/MediaQuery';
-import Sample from './EditPage/Photo/sample';
+import { media } from "../../util/MediaQuery";
+import Sample from "./EditPage/Photo/sample";
 
 //material-ui
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
-import styled from 'styled-components';
-import { set } from 'date-fns/esm';
+import styled from "styled-components";
+import { set } from "date-fns/esm";
 
 const ProfileMain = () => {
   const {
@@ -39,17 +39,15 @@ const ProfileMain = () => {
   } = useContext(AuthContext);
   let selectValue;
 
-  // firebase.auth().onAuthStateChanged((user) => {
-  //   if (user) {
-  //     setUser(user)
-
-  //     console.log(user)
-  //   }
-  // })
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUser(user);
+      console.log(user);
+    }
+  });
 
   useEffect(() => {
     // firebase.auth().onAuthStateChanged((user) => {
-
     // })
     // firebase.auth().onAuthStateChanged((user) => {
     //   if (user) {
@@ -64,13 +62,13 @@ const ProfileMain = () => {
     //   });
     // firebase.auth.user
     // console.log(user)
-  }, [jobValue])
+  }, [jobValue]);
   const handleChange = (event) => {
     selectValue = event.target.value;
-    setJobvalue(selectValue)
+    setJobvalue(selectValue);
     console.log(selectValue);
     console.log(jobValue);
-  }
+  };
   return (
     <>
       <STitle>My Profile</STitle>
@@ -86,18 +84,15 @@ const ProfileMain = () => {
         <br />
         <br />
         <br />
-
         <SProfileName>
           <SNameList>
             ユーザー名
             <br />
             <SSpan>
-              (<span style={{ color: 'red' }}>※</span>変更不可)
+              (<span style={{ color: "red" }}>※</span>変更不可)
             </SSpan>
           </SNameList>
-          <SName>
-            {user ? user.displayName : null}
-          </SName>
+          <SName>{user ? user.displayName : null}</SName>
         </SProfileName>
         <br />
         <br />
@@ -109,20 +104,19 @@ const ProfileMain = () => {
           <SRadioBtn>
             <SJobList>職種</SJobList>
             <FormControl sx={{ width: 120, m: 2 }} variant="standard">
-              <InputLabel id='demo-simple-select-label'>Job</InputLabel>
+              <InputLabel id="demo-simple-select-label">Job</InputLabel>
               <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={jobValue}
-                label='Job'
+                label="Job"
                 onChange={handleChange}
               >
-                <MenuItem value={'noAnswer'}>回答しない</MenuItem>
-                <MenuItem value={'student'}>学生</MenuItem>
-                <MenuItem value={'worker'}>社会人</MenuItem>
+                <MenuItem value={"noAnswer"}>回答しない</MenuItem>
+                <MenuItem value={"student"}>学生</MenuItem>
+                <MenuItem value={"worker"}>社会人</MenuItem>
               </Select>
             </FormControl>
-
           </SRadioBtn>
         </SProfileJobs>
         <br />
