@@ -10,7 +10,7 @@ export const LoggedInRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       component={(routeProps) =>
-        user ? <Component {...routeProps} /> : <Redirect to="/signincheck" />
+        user ? <Component {...routeProps} /> : <Redirect to="/login" />
       }
     ></Route>
   );

@@ -2,7 +2,7 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
 import styled from "styled-components";
-import firestore from 'firebase/firestore'
+import firestore from "firebase/firestore";
 // material-ui
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -16,14 +16,9 @@ import { AuthContext } from "../AuthService";
 import firebase from "../config/firebase";
 
 export const Login = ({ history }) => {
-  const {
-    user,
-    email,
-    password,
-    setUser,
-    setEmail,
-    setPassword
-  } = useContext(AuthContext);
+  const { user, email, password, setUser, setEmail, setPassword } = useContext(
+    AuthContext
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,14 +27,13 @@ export const Login = ({ history }) => {
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
         history.push("/");
-        setUser(user)
+        setUser(user);
       })
       .catch((err) => {
         console.log(err);
         alert("メールアドレスまたはパスワードが間違っています。");
       });
   };
-
 
   if (user) {
     // return <Redirect to="/" />;
@@ -123,7 +117,6 @@ export const Login = ({ history }) => {
         <br />
         <br />
         <br />
-        <Link to="/MapBox">Map</Link>
       </Box>
     </SContainer>
   );
